@@ -34,10 +34,12 @@ pip install -r requirements.txt
 ```bash
 python3 build_conversion.py
 python3 build_ads.py
+python3 build_charts.py
 ```
 
 Скрипты создают `conversion.json` и `ads.json` из API и выгрузки рекламных
-кампаний. Боты и повторные визиты учитываются по правилам шага 4.
+кампаний, а также PNG-графики в `charts/`. Боты и повторные визиты учитываются
+по правилам шага 4.
 
 ---
 
