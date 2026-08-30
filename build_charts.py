@@ -38,6 +38,15 @@ platforms = sorted({row["platform"] for row in rows})
 make_chart("Визиты по платформам", platforms, [sum(r["visits"] for r in rows if r["platform"] == p) for p in platforms], "visits_by_platform.png")
 make_chart("Регистрации по платформам", platforms, [sum(r["registrations"] for r in rows if r["platform"] == p) for p in platforms], "registrations_by_platform.png", "#54a875")
 make_chart("Средняя конверсия по платформам", platforms, [sum(r["conversion"] for r in rows if r["platform"] == p) / max(1, sum(r["visits"] for r in rows if r["platform"] == p)) for p in platforms], "conversion_by_platform.png", "#e28b3e", "%")
+daily = defaultdict(lambda: {"visits": 0, "registrations": 0})
+for row in rows:
+    daily[row["date_group"]]["visits"] += row["visits"]
+    daily[row["date_group"]]["registrations"] += row["registrations"]
+days = sorted(daily)
+labels = [str(day)[:10] for day in days]
+make_chart("Итоговые визиты по дням", labels, [daily[day]["visits"] for day in days], "total_visits.png")
+make_chart("Итоговые регистрации по дням", labels, [daily[day]["registrations"] for day in days], "total_registrations.png", "#54a875")
+make_chart("Средняя конверсия по дням", labels, [daily[day]["registrations"] / max(1, daily[day]["visits"]) * 100 for day in days], "average_conversion.png", "#e28b3e", "%")
 
 ads = json.loads((ROOT / "ads.json").read_text())
 ad_rows = [{key: ads[key][str(i)] for key in ads} for i in range(len(ads["cost"]))]

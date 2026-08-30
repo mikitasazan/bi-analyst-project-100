@@ -29,17 +29,24 @@ pip install -r requirements.txt
 данные API за период 2023-03-01 — 2023-09-01, исключает ботов, оставляет
 последний визит пользователя и сохраняет результат в `conversion.json`.
 
+Настройки API и периода лежат в `.env`; при смене периода измените только этот
+файл. Основной ноутбук называется `charts_project.ipynb`, как требует шаг 7.
+
 Для быстрой проверки без Jupyter:
 
 ```bash
 python3 build_conversion.py
 python3 build_ads.py
 python3 build_charts.py
+python3 build_presentation.py
 ```
 
 Скрипты создают `conversion.json` и `ads.json` из API и выгрузки рекламных
 кампаний, а также PNG-графики в `charts/`. Боты и повторные визиты учитываются
 по правилам шага 4.
+
+`presentation.pdf` собирается из этих графиков и содержит выводы для
+маркетинговой команды.
 
 ---
 
