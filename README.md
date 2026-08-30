@@ -13,6 +13,7 @@
 - Python — загрузка данных и расчёт конверсии
 - Jupyter Notebook — исследование данных
 - pandas, requests — работа с API и датафреймами
+- `ads.csv` — исходная выгрузка рекламных кампаний
 
 ## Установка
 
@@ -32,7 +33,11 @@ pip install -r requirements.txt
 
 ```bash
 python3 build_conversion.py
+python3 build_ads.py
 ```
+
+Скрипты создают `conversion.json` и `ads.json` из API и выгрузки рекламных
+кампаний. Боты и повторные визиты учитываются по правилам шага 4.
 
 ---
 
