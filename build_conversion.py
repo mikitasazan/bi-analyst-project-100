@@ -1,14 +1,18 @@
 """Build conversion.json from the API exports used in the notebook."""
 import json
+import os
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import urlopen
 
+from dotenv import load_dotenv
+
 ROOT = Path(__file__).parent
-params = {"begin": "2023-03-01", "end": "2023-09-01"}
-api = "https://data-charts-api.hexlet.app"
+load_dotenv(ROOT / ".env")
+params = {"begin": os.getenv("DATE_BEGIN", "2023-03-01"), "end": os.getenv("DATE_END", "2023-09-01")}
+api = os.getenv("API_URL", "https://data-charts-api.hexlet.app")
 
 
 def load(endpoint):
